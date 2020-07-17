@@ -3,6 +3,9 @@ from contextlib import contextmanager
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+from meetups.core.config import settings
+
+
 def get_engine(dsn: str):
     return create_engine(dsn)
 
@@ -20,3 +23,7 @@ def get_session(dsn: str):
         raise
     finally:
         session.close()
+
+def db():
+    with get_session(settings.DSN) as session:
+        yield session

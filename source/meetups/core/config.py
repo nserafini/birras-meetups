@@ -15,21 +15,20 @@ class BaseConfig(BaseSettings):
     POSTGRES_USER: str = ""
     POSTGRES_PASSWORD: str = ""
     POSTGRES_NAME: str = ""
-    POSTGRES_DSN: str = ""
+    DSN: str = ""
 
     @root_validator()
-    def dsn(cls, values):
-        dsn = values.get("POSTGRES_DSN")
-        if not dsn:
-            host = values["POSTGRES_HOST"]
+    def build_dsn(cls, values):
+        """ Sets DSN value (if not already set) from separate postgres values. """
+        if not values.get("DSN"):
+            host = values.get("POSTGRES_HOST", "")
             port = values.get("POSTGRES_PORT", "")
             endpoint = host + (f":{port}" if port else "")
             user = values.get("POSTGRES_USER", "")
             password = values.get("POSTGRES_PASSWORD", "")
             credentials = user + (f":{password}" if password else "")
-            name = values["POSTGRES_NAME"]
-            dsn = f"postgresql://{credentials}@{endpoint}/{name}"
-            values["POSTGRES_DSN"] = dsn
+            name = values.get("POSTGRES_DB", "")
+            values["DSN"] = f"postgresql://{credentials}@{endpoint}/{name}"
         return values
 
 @lru_cache()
