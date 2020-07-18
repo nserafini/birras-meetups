@@ -17,6 +17,7 @@ class User(BaseModel):
     email = Column(String(255), unique=True, nullable=False)
     password_hash = Column(String(128))
 
+    meetups = relationship("Meetup", secondary="meetup_users")
     roles = relationship("Role", secondary="user_roles")
 
     def set_password(self, password):
