@@ -4,9 +4,9 @@ from fastapi import Depends
 from sqlalchemy.orm import Session
 
 from meetups.core.database import db
-from meetups.services.user import RoleService
+from meetups.services.role import RoleService
 from meetups.core.config import settings
-from meetups.models.user import RoleOUT
+from meetups.models.role import RoleOUT
 
 role_router = APIRouter()
 

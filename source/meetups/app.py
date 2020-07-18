@@ -12,6 +12,7 @@ from meetups.models.user_role import UserRole
 
 from meetups.routers.meetup import meetup_router
 from meetups.routers.user import user_router
+from meetups.routers.role import role_router
 from meetups.utils.tools import generate_mocks
 
 def db_init(dev_mode, dsn):
@@ -26,7 +27,7 @@ def create_app():
     app = FastAPI(title=settings.API_NAME, version=settings.API_VERSION)
     app.include_router(meetup_router, prefix="/meetups", tags=["Meetups"])
     app.include_router(user_router, prefix="/users", tags=["Users"])
-    app.include_router(user_router, prefix="/roles", tags=["Roles"])
+    app.include_router(role_router, prefix="/roles", tags=["Roles"])
     return app
 
 db_init(settings.DEV_MODE, settings.DSN)

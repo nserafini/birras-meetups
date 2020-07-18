@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from meetups.core.exceptions import ResourceNotFound
 from meetups.models.role import Role
 
-class UserService:
+class RoleService:
     @classmethod
     def get_one(cls, db: Session, role_id: str):
         role = db.query(Role).get(role_id)
