@@ -15,6 +15,10 @@ class BaseConfig(BaseSettings):
     POSTGRES_USER: str = ""
     POSTGRES_PASSWORD: str = ""
     POSTGRES_NAME: str = ""
+    RAPID_API_URL: str = ""
+    RAPID_API_KEY: str = ""
+    RAPID_API_HOST: str = ""
+    RAPID_API_COORD: str = ""
     DSN: str = ""
 
     @root_validator()
