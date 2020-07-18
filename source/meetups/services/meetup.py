@@ -9,7 +9,7 @@ from meetups.services.weather import WeatherService
 class MeetupService:
     @classmethod
     def create(cls, db: Session, meetup: dict):
-        meetup = Meetup(**meetup)
+        meetup = Meetup(**meetup.dict())
         db.add(meetup)
         db.commit()
         db.refresh(meetup)
@@ -51,9 +51,9 @@ class MeetupService:
         if temperature > 24:
             beers = participants * 2
 
-        beer_packs = math.ceil(beers/6)
+        packs = math.ceil(beers/6)
         
-        return beer_packs
+        return beers, packs
 
     @classmethod
     def get_temperature(cls, db: Session, meetup_id: str):

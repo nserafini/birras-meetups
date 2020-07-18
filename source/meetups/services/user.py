@@ -8,7 +8,6 @@ class UserService:
         user = db.query(User).get(user_id)
         if not user:
             raise ResourceNotFound(user_id)
-        del user.password_hash
         return user
 
     @classmethod

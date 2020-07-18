@@ -33,8 +33,8 @@ def add_user(id: str, user_id: str, db: Session = Depends(db)):
 
 @meetup_router.get("/{id}/beers", status_code=200)
 def calculate_beers(id: str, db: Session = Depends(db)):
-    beers = MeetupService.calculate_beer(db, id)
-    return {'beers': beers}
+    beers, packs = MeetupService.calculate_beer(db, id)
+    return {'beers': beers, 'packs': packs}
 
 @meetup_router.get("/{id}/temperature", status_code=200)
 def get_temperature(id: str, db: Session = Depends(db)):
