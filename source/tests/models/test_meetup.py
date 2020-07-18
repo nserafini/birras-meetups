@@ -1,5 +1,4 @@
 from datetime import datetime
-from pytest import raises
 from meetups.models.meetup import Meetup
 from meetups.models.user import User
 from werkzeug.security import generate_password_hash

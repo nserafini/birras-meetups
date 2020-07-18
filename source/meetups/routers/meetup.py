@@ -14,16 +14,16 @@ def create_meetup(meetup: dict, db: Session = Depends(db)):
     return meetup
 
 @meetup_router.delete("/{id}", status_code=204)
-def delete_contact(id: int, db: Session = Depends(db)):
+def delete_meetup(id: int, db: Session = Depends(db)):
     MeetupService.delete(db, id)
 
-@meetup_router.put("/{contact_id}", status_code=200)
-def update_contact(contact_id: int, meetup: dict, db: Session = Depends(db)):
-    meetup = MeetupService.update(db, contact_id, meetup)
+@meetup_router.put("/{id}", status_code=200)
+def update_meetup(id: int, meetup: dict, db: Session = Depends(db)):
+    meetup = MeetupService.update(db, id, meetup)
     return meetup
 
 @meetup_router.get("", status_code=200)
-def get_all_contacts(db: Session = Depends(db)):
+def get_all_meetups(db: Session = Depends(db)):
     meetups = MeetupService.get_all(db)
     return meetups
 
