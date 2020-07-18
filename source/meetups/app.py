@@ -14,11 +14,10 @@ from meetups.routers.meetup import meetup_router
 from meetups.routers.user import user_router
 from meetups.utils.tools import generate_mocks
 
-def db_init(dsn):
+def db_init(dev_mode, dsn):
     engine = get_engine(dsn)
-    BaseModel.metadata.drop_all(engine)
     BaseModel.metadata.create_all(engine)
-    if settings.DEV_MODE:
+    if dev_mode:
         generate_mocks(settings.DSN)
 
 
@@ -29,5 +28,5 @@ def create_app():
     app.include_router(user_router, prefix="/roles", tags=["Roles"])
     return app
 
-db_init(settings.DSN)
+db_init(settings.DEV_MODE, settings.DSN)
 app = create_app()
