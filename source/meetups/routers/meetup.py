@@ -32,17 +32,17 @@ def get_meetup(id: int, db: Session = Depends(db)):
     meetup = MeetupService.get_one(db, id)
     return meetup
 
-@meetup_router.get("/{id}/users/{user_id}", status_code=200)
+@meetup_router.put("/{id}/users/{user_id}", status_code=200)
 def add_user(id: int, user_id: int, db: Session = Depends(db)):
     meetup = MeetupService.add_user(db, id, user_id)
-    return meetup
+    return {'users': meetup.users}
 
 @meetup_router.get("/{id}/beers", status_code=200)
 def calculate_beers(id: int, db: Session = Depends(db)):
-    beer_packs = MeetupService.calculate_beer(db, id)
-    return beer_packs
+    beers = MeetupService.calculate_beer(db, id)
+    return {'beers': beers}
 
 @meetup_router.get("/{id}/temperature", status_code=200)
 def get_temperature(id: int, db: Session = Depends(db)):
     temperature = MeetupService.get_temperature(db, id)
-    return temperature
+    return {'temperature': temperature}
