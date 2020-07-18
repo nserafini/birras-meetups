@@ -20,6 +20,7 @@ class BaseConfig(BaseSettings):
     RAPID_API_HOST: str = ""
     RAPID_API_COORD: str = ""
     DSN: str = ""
+    DEV_MODE: bool = True
 
     @root_validator()
     def build_dsn(cls, values):
