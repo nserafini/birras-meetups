@@ -8,6 +8,7 @@ from meetups.core.database import db
 from meetups.services.meetup import MeetupService
 from meetups.core.config import settings
 from meetups.models.meetup import MeetupIN, MeetupOUT
+from meetups.models.user import UserOUT
 
 meetup_router = APIRouter()
 
@@ -26,10 +27,20 @@ def get_all_meetups(db: Session = Depends(db)):
     meetups = MeetupService.get_all(db)
     return meetups
 
-@meetup_router.put("/{id}/users/{user_id}", response_model=MeetupOUT, status_code=200)
+@meetup_router.get("/{id}/users", response_model=List[UserOUT], status_code=200)
+def get_users(id: str, db: Session = Depends(db)):
+    meetup = MeetupService.get_one(db, id)
+    return meetup.users
+
+@meetup_router.put("/{id}/users/{user_id}", response_model=List[UserOUT], status_code=200)
 def add_user(id: str, user_id: str, db: Session = Depends(db)):
     meetup = MeetupService.add_user(db, id, user_id)
-    return meetup
+    return meetup.users
+
+@meetup_router.put("/{id}/users/{user_id}/check-in", status_code=200)
+def check_in_user(id: str, user_id: str, db: Session = Depends(db)):
+    meetupUser = MeetupService.check_in_user(db, id, user_id)
+    return meetupUser
 
 @meetup_router.get("/{id}/beers", status_code=200)
 def calculate_beers(id: str, db: Session = Depends(db)):

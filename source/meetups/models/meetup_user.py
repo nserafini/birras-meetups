@@ -1,5 +1,6 @@
 from sqlalchemy import Column
 from sqlalchemy import Integer
+from sqlalchemy import Boolean
 from sqlalchemy import ForeignKey
 from sqlalchemy import UniqueConstraint
 from meetups.models.base import BaseModel
@@ -11,6 +12,7 @@ class MeetupUser(BaseModel):
 
     meetup_id = Column(String, ForeignKey("meetups.id"))
     user_id = Column(String, ForeignKey("users.id"))
+    check_in = Column(Boolean, default=False)
 
     __table_args__ = (
         UniqueConstraint(

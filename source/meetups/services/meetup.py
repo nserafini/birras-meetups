@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from meetups.core.exceptions import ResourceNotFound
 from meetups.models.meetup import Meetup
+from meetups.models.meetup_user import MeetupUser
 from meetups.services.user import UserService
 from meetups.services.weather import WeatherService
 
@@ -60,3 +61,15 @@ class MeetupService:
         meetup = db.query(Meetup).get(meetup_id)
         temperature = WeatherService.get_temperature(meetup.date.strftime("%s"))
         return temperature
+
+    @classmethod
+    def check_in_user(cls, db: Session, meetup_id: str, user_id: str):
+        meetup = cls.get_one(db, meetup_id)
+        user = UserService.get_one(db, user_id)
+
+        meetupUser = db.query(MeetupUser).filter(MeetupUser.meetup_id == meetup.id, MeetupUser.user_id == user.id).first()
+        meetupUser.check_in = True
+        db.commit()
+        db.refresh(meetupUser)
+        return meetupUser
+        

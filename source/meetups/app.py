@@ -16,6 +16,7 @@ from meetups.utils.tools import generate_mocks
 
 def db_init(dev_mode, dsn):
     engine = get_engine(dsn)
+    BaseModel.metadata.drop_all(engine)
     BaseModel.metadata.create_all(engine)
     if dev_mode:
         generate_mocks(settings.DSN)
