@@ -26,6 +26,7 @@ def create_app():
     app = FastAPI(title=settings.API_NAME, version=settings.API_VERSION)
     app.include_router(meetup_router, prefix="/meetups", tags=["Meetups"])
     app.include_router(user_router, prefix="/users", tags=["Users"])
+    app.include_router(user_router, prefix="/roles", tags=["Roles"])
     return app
 
 db_init(settings.DSN)
