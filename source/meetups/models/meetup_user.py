@@ -1,16 +1,16 @@
 from sqlalchemy import Column
-from sqlalchemy import String
 from sqlalchemy import Integer
 from sqlalchemy import ForeignKey
 from sqlalchemy import UniqueConstraint
 from meetups.models.base import BaseModel
+from sqlalchemy import String
 
 class MeetupUser(BaseModel):
 
     __tablename__ = "meetup_users"
 
-    meetup_id = Column(Integer, ForeignKey("meetups.id"))
-    user_id = Column(Integer, ForeignKey("users.id"))
+    meetup_id = Column(String, ForeignKey("meetups.id"))
+    user_id = Column(String, ForeignKey("users.id"))
 
     __table_args__ = (
         UniqueConstraint(
