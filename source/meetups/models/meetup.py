@@ -1,8 +1,13 @@
 from datetime import datetime
+from typing import List
+
+from pydantic import BaseModel as BaseAPI
+from pydantic import constr
 from sqlalchemy import Column
 from sqlalchemy import String
 from sqlalchemy import DateTime
 from sqlalchemy.orm import relationship
+
 from meetups.models.base import BaseModel
 
 class Meetup(BaseModel):
@@ -14,3 +19,18 @@ class Meetup(BaseModel):
     date = Column(DateTime, nullable=False)
 
     users = relationship("User", secondary="meetup_users")
+
+
+class MeetupIN(BaseAPI):
+    name: constr(max_length=255)
+    description: constr(max_length=255)
+    date: datetime
+
+class MeetupOUT(BaseAPI):
+    id: constr(max_length=255)
+    name: constr(max_length=255)
+    description: constr(max_length=255)
+    date: datetime
+
+    class Config:
+        orm_mode = True

@@ -1,6 +1,7 @@
 import math
-
 from sqlalchemy.orm import Session
+
+from meetups.core.exceptions import ResourceNotFound
 from meetups.models.meetup import Meetup
 from meetups.services.user import UserService
 from meetups.services.weather import WeatherService
@@ -15,19 +16,10 @@ class MeetupService:
         return meetup
 
     @classmethod
-    def delete(cls, db: Session, meetup_id: int):
-        meetup = cls.get_one(db, meetup_id)
-        db.delete(meetup)
-        db.commit()
-        return meetup
-
-    @classmethod
-    def update(cls, db: Session, meetup_id: int, meetup_update: dict):
-        meetup = cls.get_one(db, meetup_id)
-        for key, value in meetup_update:
-            setattr(meetup, key, value)
-        db.commit()
-        db.refresh(meetup)
+    def get_one(cls, db: Session, meetup_id: str):
+        meetup = db.query(Meetup).get(meetup_id)
+        if not meetup:
+            raise ResourceNotFound(meetup_id)
         return meetup
 
     @classmethod
@@ -36,12 +28,7 @@ class MeetupService:
         return meetups
 
     @classmethod
-    def get_one(cls, db: Session, meetup_id: int):
-        meetup = db.query(Meetup).get(meetup_id)
-        return meetup
-
-    @classmethod
-    def add_user(cls, db: Session, meetup_id: int, user_id: int):
+    def add_user(cls, db: Session, meetup_id: str, user_id: str):
         meetup = cls.get_one(db, meetup_id)
         user = UserService.get_one(db, user_id)
         meetup.users.append(user)
@@ -50,7 +37,7 @@ class MeetupService:
         return meetup
 
     @classmethod
-    def calculate_beer(cls, db: Session, meetup_id: int):
+    def calculate_beer(cls, db: Session, meetup_id: str):
         meetup = cls.get_one(db, meetup_id)
         participants = len(meetup.users)
         temperature = WeatherService.get_temperature(meetup.date.strftime("%s"))
@@ -69,7 +56,7 @@ class MeetupService:
         return beer_packs
 
     @classmethod
-    def get_temperature(cls, db: Session, meetup_id: int):
+    def get_temperature(cls, db: Session, meetup_id: str):
         meetup = db.query(Meetup).get(meetup_id)
         temperature = WeatherService.get_temperature(meetup.date.strftime("%s"))
         return temperature
