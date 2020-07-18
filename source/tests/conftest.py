@@ -9,6 +9,8 @@ from meetups.models.base import BaseModel
 from meetups.models.meetup import Meetup
 from meetups.models.user import User
 from meetups.models.meetup_user import MeetupUser
+from meetups.models.role import Role
+from meetups.models.user_role import UserRole
 
 
 @fixture(scope="session")
