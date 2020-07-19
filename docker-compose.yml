@@ -20,7 +20,6 @@ services:
     command: "/app/scripts/start-reload.sh"
     ports:
       - "5000:${PORT:-5000}"
-      - "8001:8001"
     volumes:
       - ".:/app"
 
