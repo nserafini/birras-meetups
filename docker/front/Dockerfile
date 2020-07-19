@@ -1,0 +1,3 @@
+FROM nginx
+
+COPY ./front/dist /usr/share/nginx/html

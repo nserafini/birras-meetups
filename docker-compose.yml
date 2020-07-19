@@ -6,17 +6,17 @@ volumes:
 
 services:
 
-  app:
-    container_name: app-meetups
+  api:
+    container_name: api-meetups
     build:
         context: .
-        dockerfile: docker/app/Dockerfile
+        dockerfile: docker/api/Dockerfile
         args:
-          requirements: /app/docker/app/requirements/dev.txt
+          requirements: /app/docker/api/requirements/dev.txt
     depends_on:
       - db
     env_file:
-      - "docker/app/.env"
+      - "docker/api/.env"
     command: "/app/scripts/start-reload.sh"
     ports:
       - "5000:${PORT:-5000}"
@@ -32,3 +32,12 @@ services:
       - "5433:5432"
     volumes:
       - meetupsdb:/var/lib/postgresql/data/
+
+  front:
+    container_name: front-meetups
+    build:
+      context: .
+      dockerfile: docker/front/Dockerfile
+    env_file: docker/front/.env
+    ports:
+      - "8080:80"
