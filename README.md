@@ -8,7 +8,7 @@
 - Run tests: `docker-compose run --no-deps api pytest`
 
 ## Production
-- Build prd: `docker build . -f docker/app/Dockerfile --no-cache -t meetups`
+- Build prd: `docker build . -f docker/api/Dockerfile --no-cache -t meetups`
 - Run prd: `docker run -d -p 5000:5000 --name meetups meetups`
 
 ## Required Environment Variables
