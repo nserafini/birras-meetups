@@ -15,3 +15,6 @@ class Role(BaseModel):
 class RoleOUT(BaseAPI):
     id: constr(max_length=255)
     name: constr(max_length=255)
+
+    class Config:
+        orm_mode = True
