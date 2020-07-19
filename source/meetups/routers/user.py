@@ -31,3 +31,8 @@ def get_meetups(id: str, db: Session = Depends(db)):
 def get_roles(id: str, db: Session = Depends(db)):
     user = UserService.get_one(db, id)
     return user.roles
+
+@user_router.get("/{id}/notifications", status_code=200)
+def get_notifications(id: str, db: Session = Depends(db)):
+    notifications = UserService.get_notifications(db, id)
+    return {"notifications": notifications}

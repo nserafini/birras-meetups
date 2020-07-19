@@ -3,8 +3,8 @@ from werkzeug.security import generate_password_hash
 
 MEETUPS = [
     {"name": "after-agosto", "description": "After terraza", "date": datetime(2020, 8, 24, 17, 45)},
-    {"name": "fin-2020", "description": "Fiesta fin de año", "date": datetime(2020, 5, 6, 20, 30)},
-    {"name": "despedida-ale", "description": "Birras despedida Ale", "date": datetime(2020, 7, 21, 17, 30)},
+    {"name": "fin-2020", "description": "Fiesta fin de año", "date": datetime(2020, 12, 20, 20, 30)},
+    {"name": "despedida-ale", "description": "Birras despedida Ale", "date": datetime(2020, 7, 19, 17, 30)},
     {"name": "bienvenida-equipo", "description": "Bienvenida a nuevos integrantes al equipo", "date": datetime(2020, 8, 3, 17, 55)},
     {"name": "after-septiembre", "description": "After Puerto Madero", "date": datetime(2020, 9, 4, 18, 30)}
 ]
