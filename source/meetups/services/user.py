@@ -32,6 +32,6 @@ class UserService:
         user = db.query(User).filter(User.name == credentials['user']).first()
         if not user:
             raise InvalidAuth("user")
-        if not check_password_hash(user.password_hash, credentials['pass']):
+        if not check_password_hash(user.password_hash, credentials['password']):
             raise InvalidAuth("password")
         return user
