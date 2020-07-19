@@ -8,6 +8,7 @@ class BaseConfig(BaseSettings):
 
     API_NAME: str = "Meetups"
     API_VERSION: str = "1"
+    API_KEY: str = ""
     TIMEZONE: str = "America/Buenos_Aires"
     LOG_LEVEL: str = "INFO"
     POSTGRES_HOST: str = ""

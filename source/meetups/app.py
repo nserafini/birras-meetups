@@ -1,7 +1,9 @@
 from fastapi import FastAPI
+from fastapi import Depends
 
 from meetups.core.database import get_engine
 from meetups.core.config import settings
+from meetups.core.security import authorize
 
 from meetups.models.base import BaseModel
 from meetups.models.meetup import Meetup
@@ -25,9 +27,9 @@ def db_init(dev_mode, dsn):
 
 def create_app():
     app = FastAPI(title=settings.API_NAME, version=settings.API_VERSION)
-    app.include_router(meetup_router, prefix="/meetups", tags=["Meetups"])
-    app.include_router(user_router, prefix="/users", tags=["Users"])
-    app.include_router(role_router, prefix="/roles", tags=["Roles"])
+    app.include_router(meetup_router, prefix="/meetups", tags=["Meetups"], dependencies=[Depends(authorize)])
+    app.include_router(user_router, prefix="/users", tags=["Users"], dependencies=[Depends(authorize)])
+    app.include_router(role_router, prefix="/roles", tags=["Roles"], dependencies=[Depends(authorize)])
     return app
 
 db_init(settings.DEV_MODE, settings.DSN)

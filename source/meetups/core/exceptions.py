@@ -17,3 +17,7 @@ class HandledException(HTTPException):
 class ResourceNotFound(HandledException):
     default_message = "Resource {} not found."
     status_code = 404
+    
+class UnauthorizedRequest(HandledException):
+    default_message = "Invalid Api Key: {}"
+    status_code = 401
