@@ -2,7 +2,6 @@ from datetime import datetime
 from meetups.services.meetup import MeetupService
 from meetups.models.meetup import Meetup
 from meetups.models.user import User
-from werkzeug.security import generate_password_hash
 import random
 import string
 from unittest.mock import patch
@@ -16,14 +15,15 @@ def test_calculate_beer_cold_temperature(get_temperature_mock, db_session):
     meetup = Meetup(name=randstr(), description=randstr(), date=datetime.now())
 
     for _ in range(15):
-        user = User(name=randstr(), email=randstr(), password_hash=generate_password_hash(randstr()))
+        user = User(name=randstr(), email=randstr(), password=randstr())
         meetup.users.append(user)
 
     db_session.add(meetup)
     db_session.commit()
 
-    beer_packs = MeetupService.calculate_beer(db_session, meetup.id)
-    assert beer_packs == 2
+    beers, packs = MeetupService.calculate_beer(db_session, meetup.id)
+    assert beers == 11.25
+    assert packs == 2
 
 
 @patch('meetups.services.meetup.WeatherService.get_temperature')
@@ -32,14 +32,15 @@ def test_calculate_beer_tempered_temperature(get_temperature_mock, db_session):
     meetup = Meetup(name=randstr(), description=randstr(), date=datetime.now())
 
     for _ in range(15):
-        user = User(name=randstr(), email=randstr(), password_hash=generate_password_hash(randstr()))
+        user = User(name=randstr(), email=randstr(), password=randstr())
         meetup.users.append(user)
 
     db_session.add(meetup)
     db_session.commit()
 
-    beer_packs = MeetupService.calculate_beer(db_session, meetup.id)
-    assert beer_packs == 3
+    beers, packs = MeetupService.calculate_beer(db_session, meetup.id)
+    assert beers == 15
+    assert packs == 3
 
 
 
@@ -49,11 +50,12 @@ def test_calculate_beer_hot_temperature(get_temperature_mock, db_session):
     meetup = Meetup(name=randstr(), description=randstr(), date=datetime.now())
 
     for _ in range(15):
-        user = User(name=randstr(), email=randstr(), password_hash=generate_password_hash(randstr()))
+        user = User(name=randstr(), email=randstr(), password=randstr())
         meetup.users.append(user)
 
     db_session.add(meetup)
     db_session.commit()
 
-    beer_packs = MeetupService.calculate_beer(db_session, meetup.id)
-    assert beer_packs == 5
+    beers, packs = MeetupService.calculate_beer(db_session, meetup.id)
+    assert beers == 30
+    assert packs == 5
