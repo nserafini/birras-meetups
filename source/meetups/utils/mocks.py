@@ -1,5 +1,4 @@
 from datetime import datetime
-from werkzeug.security import generate_password_hash
 
 MEETUPS = [
     {"name": "after-agosto", "description": "After terraza", "date": datetime(2020, 8, 24, 17, 45)},
@@ -10,21 +9,21 @@ MEETUPS = [
 ]
 
 USERS = [
-    {"name": "user", "email": "user@mail.com", "password_hash": generate_password_hash("user")},
-    {"name": "sol", "email": "sol@mail.com", "password_hash": generate_password_hash("sol")},
-    {"name": "nico", "email": "nico@mail.com", "password_hash": generate_password_hash("nico")},
-    {"name": "ale", "email": "ale@mail.com", "password_hash": generate_password_hash("ale")},
-    {"name": "manu", "email": "manu@mail.com", "password_hash": generate_password_hash("manu")},
-    {"name": "carlos", "email": "carlos@mail.com", "password_hash": generate_password_hash("carlos")},
-    {"name": "pedro", "email": "pedro@mail.com", "password_hash": generate_password_hash("pedro")},
-    {"name": "juan", "email": "juan@mail.com", "password_hash": generate_password_hash("juan")},
-    {"name": "ana", "email": "ana@mail.com", "password_hash": generate_password_hash("ana")},
-    {"name": "flor", "email": "flor@mail.com", "password_hash": generate_password_hash("flor")}
+    {"name": "user", "email": "user@mail.com", "password": "user"},
+    {"name": "sol", "email": "sol@mail.com", "password": "sol"},
+    {"name": "nico", "email": "nico@mail.com", "password": "nico"},
+    {"name": "ale", "email": "ale@mail.com", "password": "ale"},
+    {"name": "manu", "email": "manu@mail.com", "password": "manu"},
+    {"name": "carlos", "email": "carlos@mail.com", "password": "carlos"},
+    {"name": "pedro", "email": "pedro@mail.com", "password": "pedro"},
+    {"name": "juan", "email": "juan@mail.com", "password": "juan"},
+    {"name": "ana", "email": "ana@mail.com", "password": "ana"},
+    {"name": "flor", "email": "flor@mail.com", "password": "flor"}
 ]
 
 ADMINS = [
-    {"name": "admin", "email": "admin@mail.com", "password_hash": generate_password_hash("admin")},
-    {"name": "mario", "email": "mario@mail.com", "password_hash": generate_password_hash("mario")}
+    {"name": "admin", "email": "admin@mail.com", "password": "admin"},
+    {"name": "mario", "email": "mario@mail.com", "password": "mario"}
 ]
 
 ROLES = [
