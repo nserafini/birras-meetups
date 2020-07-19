@@ -5,7 +5,6 @@ from sqlalchemy.orm import Session
 
 from meetups.core.database import db
 from meetups.services.user import UserService
-from meetups.core.config import settings
 from meetups.models.user import UserOUT
 from meetups.models.meetup import MeetupOUT
 from meetups.models.role import RoleOUT
