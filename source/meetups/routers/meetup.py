@@ -5,14 +5,16 @@ from fastapi import Depends
 from sqlalchemy.orm import Session
 
 from meetups.core.database import db
+from meetups.core.security import is_admin
 from meetups.services.meetup import MeetupService
-from meetups.models.meetup import MeetupIN, MeetupOUT
+from meetups.models.meetup import MeetupIN
+from meetups.models.meetup import MeetupOUT
 from meetups.models.user import UserOUT
 
 meetup_router = APIRouter()
 
 @meetup_router.post("", response_model=MeetupOUT, status_code=201)
-def create_meetup(meetup: MeetupIN, db: Session = Depends(db)):
+def create_meetup(meetup: MeetupIN, db: Session = Depends(db), is_admin: bool = Depends(is_admin)):
     meetup = MeetupService.create(db, meetup)
     return meetup
 
@@ -32,7 +34,7 @@ def get_users(id: str, db: Session = Depends(db)):
     return meetup.users
 
 @meetup_router.put("/{id}/users/{user_id}", response_model=List[UserOUT], status_code=200)
-def add_user(id: str, user_id: str, db: Session = Depends(db)):
+def add_user(id: str, user_id: str, db: Session = Depends(db), is_admin: bool = Depends(is_admin)):
     meetup = MeetupService.add_user(db, id, user_id)
     return meetup.users
 
@@ -42,7 +44,7 @@ def check_in_user(id: str, user_id: str, db: Session = Depends(db)):
     return meetupUser
 
 @meetup_router.get("/{id}/beers", status_code=200)
-def calculate_beers(id: str, db: Session = Depends(db)):
+def calculate_beers(id: str, db: Session = Depends(db), is_admin: bool = Depends(is_admin)):
     beers, packs = MeetupService.calculate_beer(db, id)
     return {'beers': beers, 'packs': packs}
 

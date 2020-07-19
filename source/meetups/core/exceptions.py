@@ -21,3 +21,15 @@ class ResourceNotFound(HandledException):
 class UnauthorizedRequest(HandledException):
     default_message = "Invalid Api Key: {}"
     status_code = 401
+
+class InvalidAuth(HandledException):
+    default_message = "Failed Auth: invalid {}"
+    status_code = 403
+
+class ForbiddenNotLogged(HandledException):
+    default_message = "Forbidden: Not logged"
+    status_code = 403
+
+class ForbiddenNoAdminRole(HandledException):
+    default_message = "Forbidden: Only admin allowed"
+    status_code = 403
