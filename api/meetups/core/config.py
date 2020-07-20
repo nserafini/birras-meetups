@@ -1,7 +1,9 @@
+from typing import List
 from functools import lru_cache
 
 from pydantic import BaseSettings
 from pydantic import root_validator
+
 
 
 class BaseConfig(BaseSettings):
@@ -22,6 +24,7 @@ class BaseConfig(BaseSettings):
     RAPID_API_COORD: str = ""
     DSN: str = ""
     DEV_MODE: bool = True
+    CORS_ORIGINS: List = []
 
     @root_validator()
     def build_dsn(cls, values):

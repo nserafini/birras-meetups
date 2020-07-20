@@ -23,10 +23,9 @@ from meetups.utils.tools import generate_mocks
 
 def db_init(dev_mode, dsn):
     engine = get_engine(dsn)
-    BaseModel.metadata.drop_all(engine)
     BaseModel.metadata.create_all(engine)
     if dev_mode:
-        generate_mocks(settings.DSN)
+        generate_mocks(dsn)
 
 
 def create_app():
@@ -58,7 +57,7 @@ def create_app():
 
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],
+        allow_origins=settings.CORS_ORIGINS,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
