@@ -1,0 +1,13 @@
+<mat-accordion *ngFor="let meetup of meetups" class="example-headers-align"  multi>
+    <mat-expansion-panel (afterExpand)="loadData(meetup)">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{meetup.description}}</mat-panel-title>
+            <mat-panel-description>{{meetup.date}} - {{meetup.remaining}}</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-icon>supervisor_account</mat-icon><span>{{meetup.users}}</span><br>
+        <mat-icon>wb_sunny</mat-icon><span>{{meetup.temperature}}</span><br>
+        <mat-icon>local_bar</mat-icon><span>{{meetup.beers}}</span>
+    </mat-expansion-panel>
+</mat-accordion>
+  

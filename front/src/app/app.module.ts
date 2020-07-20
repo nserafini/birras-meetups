@@ -5,17 +5,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { MeetupComponent } from './components/meetup/meetup.component';
 import { AppRoutingModule } from './app.routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
+import { MeetupListComponent } from './components/meetup-list/meetup-list.component';
+
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MeetupComponent
+    MeetupComponent,
+    MeetupListComponent
   ],
   imports: [
     BrowserModule,   
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

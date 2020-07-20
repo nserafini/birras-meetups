@@ -25,4 +25,8 @@ export class MeetupService {
   getTemperature(id: string) {
     return this.http.get(`${environment.API_URL}/meetups/${id}/temperature`, environment.API_HEADERS);
   }
+
+  getAll() {
+    return this.http.get(`${environment.API_URL}/meetups`, environment.API_HEADERS);
+  }
 }
