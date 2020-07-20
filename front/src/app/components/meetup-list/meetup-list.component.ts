@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MeetupService } from '../../services/meetup.service';
-import {MatAccordion} from '@angular/material/expansion';
+import { UserService } from '../../services/user.service';
+import { MatAccordion } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-meetup-list',
@@ -10,22 +11,38 @@ import {MatAccordion} from '@angular/material/expansion';
 export class MeetupListComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   meetups;
+  isAdmin: boolean = false;
 
   constructor(
-    private meetupService: MeetupService
+    private meetupService: MeetupService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
+    this.userService.getRoles(this.userService.getUserId()).subscribe(roles => {
+      Object(roles).forEach((role) => {if(role["name"] == "admin"){this.isAdmin = true;}})
+    })
     this.getAllMeetups();
   }
   
-  loadData(meetup) {
-    //TODO
+  loadMeetupData(meetup) {
+
+    this.meetupService.getUsers(meetup.id).subscribe(response => {
+      meetup.users = Object.keys(response).length;
+    });
+    this.meetupService.getTemperature(meetup.id).subscribe(response => {
+      meetup.temperature = response['temperature']
+    });
+
+    if(this.isAdmin){
+      this.meetupService.getBeers(meetup.id).subscribe(response => {
+        meetup.beers = response['beers']
+        meetup.packs = response['packs']
+      });
+    }
   }
 
   getAllMeetups(): void {
-    this.meetupService.getAll().subscribe(response => {
-      this.meetups = response
-    });
+    this.meetupService.getAll().subscribe(response => {this.meetups = response});
   }
 }

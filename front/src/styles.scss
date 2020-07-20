@@ -5,3 +5,12 @@
 .example-spacer { flex: 1 1 auto; }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-icon {
+    vertical-align: middle;
+ }
+
+.meetup-list .data{
+    padding: 10px;
+    display: inline-block;
+    border-bottom: 1px solid #eaeaea;
+}
