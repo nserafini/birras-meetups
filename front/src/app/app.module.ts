@@ -1,14 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { MeetupComponent } from './components/meetup/meetup.component';
+import { AppRoutingModule } from './app.routing.module';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MeetupComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,   
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
