@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi import Depends
+from fastapi.middleware.cors import CORSMiddleware
 
 from meetups.core.database import get_engine
 from meetups.core.config import settings
@@ -30,10 +31,38 @@ def db_init(dev_mode, dsn):
 
 def create_app():
     app = FastAPI(title=settings.API_NAME, version=settings.API_VERSION)
-    app.include_router(meetup_router, prefix="/meetups", tags=["Meetups"], dependencies=[Depends(is_authorize), Depends(is_logged)])
-    app.include_router(user_router, prefix="/users", tags=["Users"], dependencies=[Depends(is_authorize), Depends(is_logged)])
-    app.include_router(role_router, prefix="/roles", tags=["Roles"], dependencies=[Depends(is_authorize), Depends(is_logged)])
-    app.include_router(auth_router, prefix="/auth", tags=["Auth"], dependencies=[Depends(is_authorize)])
+    app.include_router(
+        meetup_router, 
+        prefix="/meetups", 
+        tags=["Meetups"], 
+        dependencies=[Depends(is_authorize), Depends(is_logged)]
+    )
+    app.include_router(
+        user_router, 
+        prefix="/users", 
+        tags=["Users"], 
+        dependencies=[Depends(is_authorize), Depends(is_logged)]
+    )
+    app.include_router(
+        role_router, 
+        prefix="/roles", 
+        tags=["Roles"], 
+        dependencies=[Depends(is_authorize), Depends(is_logged)]
+    )
+    app.include_router(
+        auth_router, 
+        prefix="/auth", 
+        tags=["Auth"], 
+        dependencies=[Depends(is_authorize)]
+    )
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
     return app
 
 db_init(settings.DEV_MODE, settings.DSN)
