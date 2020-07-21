@@ -13,7 +13,6 @@ export class MeetupListComponent implements OnInit {
   meetups: any = [];
   isLogged: boolean = false;
   isAdmin: boolean = false;
-  isLoading: boolean = true;
 
   constructor(
     private meetupService: MeetupService,
@@ -21,11 +20,13 @@ export class MeetupListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isLoading = true
     this.isLogged = this.userService.isLogged()
     if(this.isLogged){
       this.userService.getRoles(this.userService.getUserId()).subscribe(roles => {
-        Object(roles).forEach((role) => {if(role["name"] == "admin"){this.isAdmin = true;}})
+        Object(roles).forEach((role) => { if(role["name"] == "admin"){ this.isAdmin = true }})
+      },
+      (err) => {
+        console.log(err)
       })
       this.getAllMeetups();
     }
@@ -35,20 +36,28 @@ export class MeetupListComponent implements OnInit {
 
     this.meetupService.getTemperature(meetup.id).subscribe(response => {
       meetup.temperature = response['temperature']
-    });
+    },
+    (err) => {
+      console.log(err)
+    })
 
     if(this.isAdmin){
       this.meetupService.getBeers(meetup.id).subscribe(response => {
         meetup.beers = response['beers']
         meetup.packs = response['packs']
-      });
+      },
+      (err) => {
+        console.log(err)
+      })
     }
   }
 
   getAllMeetups(): void {
     this.meetupService.getAll().subscribe(response => {
       this.meetups = response
-      this.isLoading = false
-    });
+    },
+    (err) => {
+      console.log(err)
+    })
   }
 }
