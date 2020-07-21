@@ -2,11 +2,11 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MeetupComponent } from './components/meetup/meetup.component';
 import { MeetupListComponent } from './components/meetup-list/meetup-list.component';
+import { MeetupCreateComponent } from './components/meetup-create/meetup-create.component';
 
 const routes: Routes = [
     { path: '', component: MeetupListComponent },
-    { path: 'meetups', component: MeetupListComponent },
-    { path: 'meetups/:id', component: MeetupComponent }
+    { path: 'meetup-create', component: MeetupCreateComponent }
   ];
   
 
