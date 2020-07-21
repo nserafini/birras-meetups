@@ -18,12 +18,14 @@ body {
     display: inline-block;
     border-bottom: 1px solid #eaeaea;
 }
+mat-card.not-meetups .mat-card-header-text,  
 mat-card.not-logged .mat-card-header-text {
     text-align: center;
     margin-bottom: 0;
     margin-right: auto;
     margin-left: auto;
 }
+mat-card.not-meetups .mat-card-header-text .mat-card-title, 
 mat-card.not-logged .mat-card-header-text .mat-card-title {
     margin: 0
 }

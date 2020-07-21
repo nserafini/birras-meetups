@@ -10,9 +10,10 @@ import { MatAccordion } from '@angular/material/expansion';
 })
 export class MeetupListComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  meetups;
+  meetups: any = [];
   isLogged: boolean = false;
   isAdmin: boolean = false;
+  isLoading: boolean = true;
 
   constructor(
     private meetupService: MeetupService,
@@ -20,6 +21,7 @@ export class MeetupListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isLoading = true
     this.isLogged = this.userService.isLogged()
     if(this.isLogged){
       this.userService.getRoles(this.userService.getUserId()).subscribe(roles => {
@@ -44,6 +46,9 @@ export class MeetupListComponent implements OnInit {
   }
 
   getAllMeetups(): void {
-    this.meetupService.getAll().subscribe(response => {this.meetups = response});
+    this.meetupService.getAll().subscribe(response => {
+      this.meetups = response
+      this.isLoading = false
+    });
   }
 }
