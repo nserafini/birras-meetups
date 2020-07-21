@@ -14,6 +14,7 @@ import { MeetupCreateComponent } from './components/meetup-create/meetup-create.
 import { ToolbarAdminActionsComponent } from './components/toolbar-admin-actions/toolbar-admin-actions.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MeetupListComponent,
     ToobarComponent,
     MeetupCreateComponent,
-    ToolbarAdminActionsComponent
+    ToolbarAdminActionsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,   
