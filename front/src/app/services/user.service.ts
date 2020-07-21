@@ -15,6 +15,11 @@ export class UserService {
     return this.http.get(`${environment.API_URL}/users/${id}`, environment.API_HEADERS);
   }
 
+  getAll() {
+    return this.http.get(`${environment.API_URL}/users`, environment.API_HEADERS);
+  }
+
+
   getRoles(id: string) {
     return this.http.get(`${environment.API_URL}/users/${id}/roles`, environment.API_HEADERS);
   }
