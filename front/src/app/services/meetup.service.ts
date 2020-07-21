@@ -10,6 +10,10 @@ export class MeetupService {
 
   constructor(private http: HttpClient) { }
 
+  create(data) {
+    return this.http.post(`${environment.API_URL}/meetups`, data, environment.API_HEADERS);
+  }
+
   getOne(id: string) {
     return this.http.get(`${environment.API_URL}/meetups/${id}`, environment.API_HEADERS);
   }
