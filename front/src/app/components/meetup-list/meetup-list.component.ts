@@ -11,6 +11,7 @@ import { MatAccordion } from '@angular/material/expansion';
 export class MeetupListComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   meetups;
+  isLogged: boolean = false;
   isAdmin: boolean = false;
 
   constructor(
@@ -19,10 +20,13 @@ export class MeetupListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getRoles(this.userService.getUserId()).subscribe(roles => {
-      Object(roles).forEach((role) => {if(role["name"] == "admin"){this.isAdmin = true;}})
-    })
-    this.getAllMeetups();
+    this.isLogged = this.userService.isLogged()
+    if(this.isLogged){
+      this.userService.getRoles(this.userService.getUserId()).subscribe(roles => {
+        Object(roles).forEach((role) => {if(role["name"] == "admin"){this.isAdmin = true;}})
+      })
+      this.getAllMeetups();
+    }
   }
   
   loadMeetupData(meetup) {

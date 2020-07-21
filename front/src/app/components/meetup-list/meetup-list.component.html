@@ -1,16 +1,24 @@
-<mat-accordion *ngFor="let meetup of meetups" class="meetup-list" multi>
-    <mat-expansion-panel (afterExpand)="loadMeetupData(meetup)">
-        <mat-expansion-panel-header>
-            <mat-panel-title>{{meetup.description}}</mat-panel-title>
-        </mat-expansion-panel-header>
+<div *ngIf=isLogged>
+    <mat-accordion *ngFor="let meetup of meetups" class="meetup-list" multi>
+        <mat-expansion-panel (afterExpand)="loadMeetupData(meetup)">
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{meetup.description}}</mat-panel-title>
+            </mat-expansion-panel-header>
 
-        <mat-icon>date_range</mat-icon><span class="data">Fecha : {{meetup.date}}</span>
-        <mat-icon>supervisor_account</mat-icon><span class="data">Participantes : {{meetup.users}}</span>
-        <mat-icon>wb_sunny</mat-icon><span class="data">Temperatura °C: {{meetup.temperature}}</span><br>
-        <div *ngIf=isAdmin>
-            <mat-icon>local_bar</mat-icon><span class="data">Cervezas : {{meetup.beers}}</span>
-            <mat-icon>backpack</mat-icon><span class="data">Packs : {{meetup.packs}}</span>
-        </div>
-    </mat-expansion-panel>
-</mat-accordion>
+            <mat-icon>date_range</mat-icon><span class="data">Fecha : {{meetup.date}}</span>
+            <mat-icon>supervisor_account</mat-icon><span class="data">Participantes : {{meetup.users}}</span>
+            <mat-icon>wb_sunny</mat-icon><span class="data">Temperatura °C: {{meetup.temperature}}</span><br>
+            <div *ngIf=isAdmin>
+                <mat-icon>local_bar</mat-icon><span class="data">Cervezas : {{meetup.beers}}</span>
+                <mat-icon>backpack</mat-icon><span class="data">Packs : {{meetup.packs}}</span>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
   
+
+<mat-card *ngIf=!isLogged class="not-logged">
+    <mat-card-header>
+        <mat-card-title>No estás logueado</mat-card-title>
+    </mat-card-header>
+</mat-card>
