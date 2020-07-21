@@ -19,7 +19,6 @@ export class UserService {
     return this.http.get(`${environment.API_URL}/users`, environment.API_HEADERS);
   }
 
-
   getRoles(id: string) {
     return this.http.get(`${environment.API_URL}/users/${id}/roles`, environment.API_HEADERS);
   }
@@ -31,6 +30,10 @@ export class UserService {
     catch(Error){
       return null;
     }
+  }
+
+  login(credentials) {
+    return this.http.post(`${environment.API_URL}/auth/login`, credentials, environment.API_HEADERS);
   }
 
   isLogged(){
