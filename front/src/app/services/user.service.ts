@@ -18,9 +18,25 @@ export class UserService {
   getRoles(id: string) {
     return this.http.get(`${environment.API_URL}/users/${id}/roles`, environment.API_HEADERS);
   }
+
+  getDecodedToken(token) {
+    try{
+      return jwt_decode(token);
+    }
+    catch(Error){
+      return null;
+    }
+  }
+
+  isLogged(){
+    return this.getDecodedToken(this.cookie.get("token"))
+  }
   
   getUserId() {
-    let payload = jwt_decode(this.cookie.get("token"))
-    return payload['user']['id']
+    let token = this.getDecodedToken(this.cookie.get("token"))
+    if(token){
+      return token['user']['id']
+    }
+    return false
   }
 }
