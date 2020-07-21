@@ -22,7 +22,16 @@ export class LogoutComponent implements OnInit {
         duration: 5000,
         horizontalPosition: "center",
         verticalPosition: "top",
-      });
+      })
+    },
+    (err) => {
+      console.log(err)
+      this.router.navigate(['/']);      
+      this._snackBar.open("Ocurrió un error al cerrar sesión", "Cerrar", {
+        duration: 5000,
+        horizontalPosition: "center",
+        verticalPosition: "top",
+      })
     })
   }
 

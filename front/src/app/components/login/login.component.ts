@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         });
       },
       (err) => {
-        this._snackBar.open("Ocurrio un error, verifique credenciales", "Cerrar", {
+        this._snackBar.open("Ocurrió un error: verifica credenciales", "Cerrar", {
           duration: 5000,
           horizontalPosition: "center",
           verticalPosition: "top",
