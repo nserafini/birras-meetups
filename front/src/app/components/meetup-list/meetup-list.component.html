@@ -1,3 +1,4 @@
+<app-toobar></app-toobar>
 <div *ngIf=isLogged>
     <mat-accordion *ngFor="let meetup of meetups" class="meetup-list" multi>
         <mat-expansion-panel (afterExpand)="loadMeetupData(meetup)">
