@@ -15,6 +15,7 @@ import { ToolbarAdminActionsComponent } from './components/toolbar-admin-actions
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { LoginComponent } from './components/login/login.component';
     ToobarComponent,
     MeetupCreateComponent,
     ToolbarAdminActionsComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,   

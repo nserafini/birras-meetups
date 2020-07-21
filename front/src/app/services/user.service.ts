@@ -36,6 +36,11 @@ export class UserService {
     return this.http.post(`${environment.API_URL}/auth/login`, credentials, environment.API_HEADERS);
   }
 
+  logout() {
+    return this.http.delete(`${environment.API_URL}/auth/logout`, environment.API_HEADERS);
+  }
+
+
   isLogged(){
     return this.getDecodedToken(this.cookie.get("token"))
   }
