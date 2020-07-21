@@ -62,14 +62,14 @@ export class MeetupCreateComponent implements OnInit {
       this.router.navigate([''])
       this._snackBar.open("Meet creada con éxito!", "Cerrar", {
         duration: 10000,
-        horizontalPosition: "end",
+        horizontalPosition: "center",
         verticalPosition: "top",
       });
     },
     (err) => {
       this._snackBar.open("Ocurrio un error", "Cerrar", {
         duration: 10000,
-        horizontalPosition: "end",
+        horizontalPosition: "center",
         verticalPosition: "top",
       });
       console.log(err)
