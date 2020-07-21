@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { MeetupService } from '../../services/meetup.service';
-import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
-import { of } from 'rxjs';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ValidatorFn } from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from "@angular/router"
+
+
 
 @Component({
   selector: 'app-meetup-create',
@@ -15,14 +18,17 @@ export class MeetupCreateComponent implements OnInit {
 
 
   constructor(
-    private userService: UserService, 
     private meetupService: MeetupService,
-    private formBuilder: FormBuilder
+    private userService: UserService, 
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {
+
     this.form = this.formBuilder.group({
-      name: new FormControl(),
-      description: new FormControl(),
-      date: new FormControl(),
+      name: new FormControl(null, Validators.required),
+      description: new FormControl(null, Validators.required),
+      date: new FormControl(null, Validators.required),
       users: new FormArray([], minSelectedCheckboxes(1))
     });
     this.userService.getAll().subscribe(users => {
@@ -40,13 +46,34 @@ export class MeetupCreateComponent implements OnInit {
       .map((checked, i) => checked ? this.users[i].id : null)
       .filter(v => v !== null);
 
+      if (this.form.invalid) {
+        return;
+      }
+
     let data = {
       'name': this.form.value.name,
       'description': this.form.value.description,
       'date': this.form.value.date,
       'users': selectedUserIds
     }
-    this.meetupService.create(data).subscribe(response => {console.log(response)});
+
+    this.meetupService.create(data).subscribe(response => {
+      console.log(response)
+      this.router.navigate([''])
+      this._snackBar.open("Meet creada con éxito!", "Cerrar", {
+        duration: 10000,
+        horizontalPosition: "end",
+        verticalPosition: "top",
+      });
+    },
+    (err) => {
+      this._snackBar.open("Ocurrio un error", "Cerrar", {
+        duration: 10000,
+        horizontalPosition: "end",
+        verticalPosition: "top",
+      });
+      console.log(err)
+    });
   }
 
   ngOnInit(): void {}
