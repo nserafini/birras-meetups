@@ -1,16 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-
-.example-spacer { flex: 1 1 auto; }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.spacer { 
+    flex: 1 1 auto; 
+}
+html, body { 
+    height: 100%; 
+}
+body { 
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
 .mat-icon {
     vertical-align: middle;
  }
-
-.meetup-list .data{
+.meetup-list .data {
     padding: 10px;
     display: inline-block;
     border-bottom: 1px solid #eaeaea;
+}
+mat-card.not-logged .mat-card-header-text {
+    text-align: center;
+    margin-bottom: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+mat-card.not-logged .mat-card-header-text .mat-card-title {
+    margin: 0
 }
