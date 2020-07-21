@@ -19,7 +19,7 @@ from meetups.routers.user import user_router
 from meetups.routers.role import role_router
 from meetups.routers.auth import auth_router
 
-from meetups.utils.tools import generate_mocks
+from meetups.utils.mocks import generate_mocks
 
 def db_init(dev_mode, dsn):
     engine = get_engine(dsn)
