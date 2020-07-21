@@ -31,9 +31,6 @@ export class MeetupListComponent implements OnInit {
   
   loadMeetupData(meetup) {
 
-    this.meetupService.getUsers(meetup.id).subscribe(response => {
-      meetup.users = Object.keys(response).length;
-    });
     this.meetupService.getTemperature(meetup.id).subscribe(response => {
       meetup.temperature = response['temperature']
     });

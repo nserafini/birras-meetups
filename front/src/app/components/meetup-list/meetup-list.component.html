@@ -6,7 +6,7 @@
             </mat-expansion-panel-header>
 
             <mat-icon>date_range</mat-icon><span class="data">Fecha : {{meetup.date}}</span>
-            <mat-icon>supervisor_account</mat-icon><span class="data">Participantes : {{meetup.users}}</span>
+            <mat-icon>supervisor_account</mat-icon><span class="data">Participantes : {{meetup.users.length}}</span>
             <mat-icon>wb_sunny</mat-icon><span class="data">Temperatura °C: {{meetup.temperature}}</span><br>
             <div *ngIf=isAdmin>
                 <mat-icon>local_bar</mat-icon><span class="data">Cervezas : {{meetup.beers}}</span>
