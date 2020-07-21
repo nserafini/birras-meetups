@@ -5,7 +5,7 @@
 ## Development
 - Build dev: `docker-compose build`
 - Run dev: `docker-compose up`
-- Run tests: `docker-compose run --no-deps api pytest`
+- Run tests: `docker-compose run --no-deps api pytest api/`
 
 ## Production
 - Build prd: `docker build . -f docker/api/Dockerfile --no-cache -t meetups`
