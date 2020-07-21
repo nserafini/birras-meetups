@@ -15,7 +15,7 @@ from meetups.models.user_role import UserRole
 
 @fixture(scope="session")
 def dsn():
-    return "sqlite://///app/source/tests/meetups_test.db?check_same_thread=False"
+    return "sqlite://///app/api/tests/meetups_test.db?check_same_thread=False"
 
 
 @fixture
