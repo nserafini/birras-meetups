@@ -10,7 +10,19 @@ from meetups.services.weather import WeatherService
 class MeetupService:
     @classmethod
     def create(cls, db: Session, meetup: dict):
-        meetup = Meetup(**meetup.dict())
+        users = []
+        
+        for user_id in meetup.users:
+            user = UserService.get_one(db, user_id)
+            users.append(user)
+
+        meetup = Meetup(
+            name=meetup.name, 
+            description=meetup.description, 
+            date=meetup.date, 
+            users=users
+        )
+
         db.add(meetup)
         db.commit()
         db.refresh(meetup)
@@ -60,7 +72,7 @@ class MeetupService:
     def get_temperature(cls, db: Session, meetup_id: str):
         meetup = db.query(Meetup).get(meetup_id)
         temperature = WeatherService.get_temperature(meetup.date.strftime("%s"))
-        return temperature
+        return round(temperature)
 
     @classmethod
     def check_in_user(cls, db: Session, meetup_id: str, user_id: str):

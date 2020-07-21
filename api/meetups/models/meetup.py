@@ -9,6 +9,7 @@ from sqlalchemy import DateTime
 from sqlalchemy.orm import relationship
 
 from meetups.models.base import BaseModel
+from meetups.models.user import UserOUT
 
 class Meetup(BaseModel):
 
@@ -25,12 +26,14 @@ class MeetupIN(BaseAPI):
     name: constr(max_length=255)
     description: constr(max_length=255)
     date: datetime
+    users: List = []
 
 class MeetupOUT(BaseAPI):
     id: constr(max_length=255)
     name: constr(max_length=255)
     description: constr(max_length=255)
     date: datetime
+    users: List[UserOUT] = []
 
     class Config:
         orm_mode = True
