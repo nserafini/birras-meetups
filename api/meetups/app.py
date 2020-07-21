@@ -66,3 +66,12 @@ def create_app():
 
 db_init(settings.DEV_MODE, settings.DSN)
 app = create_app()
+
+@app.get("/")
+def index():
+    return {
+        'api': {
+            'name': settings.API_NAME, 
+            'version': settings.API_VERSION
+        }
+    }
