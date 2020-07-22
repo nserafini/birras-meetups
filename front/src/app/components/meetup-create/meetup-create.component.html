@@ -1,0 +1,27 @@
+<app-toobar></app-toobar>
+<form class="submit-form" [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field class="submit-field">
+        <mat-label>Nombre</mat-label>
+        <input formControlName="name" matInput>
+    </mat-form-field>
+    <mat-form-field class="submit-field">
+        <mat-label>Descripcion</mat-label>
+        <input formControlName="description" matInput>
+    </mat-form-field>
+    <mat-form-field class="submit-field">
+        <mat-label>Fecha</mat-label>
+        <input formControlName="date" matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <ul>
+      <mat-label class="submit-field-block">Invitados</mat-label>
+      <li formArrayName="users" *ngFor="let order of usersFormArray.controls; let i = index">
+        <mat-checkbox [formControlName]="i">{{users[i].name}}</mat-checkbox>
+      </li>
+    </ul>
+
+
+    <button mat-raised-button color="primary">Crear</button>
+</form>

@@ -1,0 +1,12 @@
+<app-toobar></app-toobar>
+<form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field class="login-field">
+        <mat-label>Usuario</mat-label>
+        <input formControlName="user" matInput>
+    </mat-form-field><br>
+    <mat-form-field class="login-field">
+        <mat-label>Contraseña</mat-label>
+        <input formControlName="password" matInput>
+    </mat-form-field><br>
+    <button mat-raised-button color="primary">Ingresar</button>
+</form>

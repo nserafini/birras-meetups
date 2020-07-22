@@ -1,0 +1,42 @@
+version: '3'
+
+volumes:
+  meetupsdb:
+    driver: local
+
+services:
+
+  api:
+    container_name: api-meetups
+    build:
+        context: .
+        dockerfile: docker/api/Dockerfile
+        args:
+          requirements: /app/docker/api/requirements/dev.txt
+    depends_on:
+      - db
+    env_file:
+      - "docker/api/.env"
+    command: "/app/scripts/start-reload.sh"
+    ports:
+      - "5000:${PORT:-5000}"
+    volumes:
+      - ".:/app"
+
+  db:
+    container_name: db-meetups
+    build: docker/sql
+    env_file: docker/sql/.env
+    ports:
+      - "5433:5432"
+    volumes:
+      - meetupsdb:/var/lib/postgresql/data/
+
+  front:
+    container_name: front-meetups
+    build:
+      context: .
+      dockerfile: docker/front/Dockerfile
+    env_file: docker/front/.env
+    ports:
+      - "8080:80"

@@ -1,0 +1,33 @@
+.submit-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.submit-form button{
+  width: 100%;
+}
+  
+.submit-field {
+    width: 100%;
+}
+
+.submit-field-block{
+    width: 100;
+    display: block;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+  margin: 0;
+  padding: 10px 0;
+}
+
+ul li {
+  display: inline-block;
+  width: 50%;
+}

@@ -1,0 +1,8 @@
+<mat-toolbar>
+    <img [routerLink]="['/']" width="32" src="/assets/icon.png"/>
+    <span [routerLink]="['/']">Meetups</span>
+    <span class="spacer"></span>
+    <app-toolbar-admin-actions *ngIf=isAdmin></app-toolbar-admin-actions>
+    <mat-icon class="login-icon" *ngIf=!isLogged [routerLink]="['/login']">login</mat-icon>
+    <mat-icon class="logout-icon" *ngIf=isLogged [routerLink]="['/logout']">logout</mat-icon>
+</mat-toolbar>
