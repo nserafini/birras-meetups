@@ -15,7 +15,7 @@
             </div>
         </mat-expansion-panel>
     </mat-accordion>
-    <mat-card *ngIf=!meetups.length class="not-meetups">
+    <mat-card *ngIf="!isLoading && !meetups.length" class="not-meetups">
         <mat-card-header>
             <mat-card-title>No se encontraron Meetups</mat-card-title>
         </mat-card-header>

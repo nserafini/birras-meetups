@@ -13,6 +13,7 @@ export class MeetupListComponent implements OnInit {
   meetups: any = [];
   isLogged: boolean = false;
   isAdmin: boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     private meetupService: MeetupService,
@@ -20,6 +21,7 @@ export class MeetupListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isLoading = true
     this.isLogged = this.userService.isLogged()
     if(this.isLogged){
       this.userService.getRoles(this.userService.getUserId()).subscribe(roles => {
@@ -55,9 +57,11 @@ export class MeetupListComponent implements OnInit {
   getAllMeetups(): void {
     this.meetupService.getAll().subscribe(response => {
       this.meetups = response
+      this.isLoading = false
     },
     (err) => {
       console.log(err)
+      this.isLoading = false
     })
   }
 }
