@@ -23,6 +23,8 @@
 - RAPID_API_KEY
 - RAPID_API_HOST
 - RAPID_API_COORD
+- DEV_MODE
+- CORS_ORIGINS
 
 ## Dev users
 - admin : admin
