@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
 
   constructor(private http: HttpClient, private cookie: CookieService) { }
@@ -23,15 +24,6 @@ export class UserService {
     return this.http.get(`${environment.API_URL}/users/${id}/roles`, environment.API_HEADERS);
   }
 
-  getDecodedToken(token) {
-    try{
-      return jwt_decode(token);
-    }
-    catch(Error){
-      return null;
-    }
-  }
-
   login(credentials) {
     return this.http.post(`${environment.API_URL}/auth/login`, credentials, environment.API_HEADERS);
   }
@@ -40,9 +32,40 @@ export class UserService {
     return this.http.delete(`${environment.API_URL}/auth/logout`, environment.API_HEADERS);
   }
 
+  async isLogged(){
+    let user : any
+    if(this.getUserId()){
+      await this.getOne(this.getUserId()).toPromise().then(resp => {user = resp}, msg => {user = false});
+      if(user){
+        return true
+      }
+    }
+    return false
+  }
 
-  isLogged(){
-    return this.getDecodedToken(this.cookie.get("token"))
+  async isAdmin(){ 
+    let roles : any
+    let isAdmin = false;
+    if(this.getUserId()){
+      await this.getRoles(this.getUserId()).toPromise().then(resp => {roles = resp}, msg => {roles = false});
+      if(roles){
+        Object(roles).forEach((role) => {
+          if(role["name"] == "admin"){
+            isAdmin = true
+          }
+        })
+      }
+    }
+    return isAdmin
+  }
+
+  getDecodedToken(token) {
+    try{
+      return jwt_decode(token);
+    }
+    catch(Error){
+      return null;
+    }
   }
   
   getUserId() {

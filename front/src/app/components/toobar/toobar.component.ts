@@ -13,11 +13,13 @@ export class ToobarComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {    
-    this.isLogged = this.userService.isLogged()
-    if(this.isLogged){
-      this.userService.getRoles(this.userService.getUserId()).subscribe(roles => {
-        Object(roles).forEach((role) => {if(role["name"] == "admin"){this.isAdmin = true;}})
-      })
-    }
+    this.userService.isLogged().then(logged => {
+      this.isLogged = logged
+      if(logged){
+        this.userService.isAdmin().then(admin => {
+          this.isAdmin = admin
+        })
+      }
+    })
   }
 }

@@ -22,16 +22,15 @@ export class MeetupListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true
-    this.isLogged = this.userService.isLogged()
-    if(this.isLogged){
-      this.userService.getRoles(this.userService.getUserId()).subscribe(roles => {
-        Object(roles).forEach((role) => { if(role["name"] == "admin"){ this.isAdmin = true }})
-      },
-      (err) => {
-        console.log(err)
-      })
-      this.getAllMeetups();
-    }
+    this.userService.isLogged().then(logged => {
+      this.isLogged = logged
+      this.getAllMeetups()
+      if(logged){
+        this.userService.isAdmin().then(admin => {
+          this.isAdmin = admin
+        })
+      }
+    })
   }
   
   loadMeetupData(meetup) {
