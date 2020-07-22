@@ -23,3 +23,7 @@
 - RAPID_API_KEY
 - RAPID_API_HOST
 - RAPID_API_COORD
+
+## Dev users
+- admin : admin
+- user : user
